@@ -9,6 +9,7 @@ public class PlayerScript : MonoBehaviour
     private bool facingRight;
     private Rigidbody2D rb;
     private Transform tf;
+    private Animator playerAnimator;
 
     // Use this for initialization
     void Start()
@@ -18,6 +19,9 @@ public class PlayerScript : MonoBehaviour
         this.facingRight = true;
         this.rb = GetComponent<Rigidbody2D>();
         this.tf = GetComponent<Transform>();
+        this.playerAnimator = GetComponent<Animator>();
+        this.playerAnimator.SetBool("Walking", false);
+        this.playerAnimator.SetBool("Jumping", false);
     }
 
     void FixedUpdate()
@@ -29,17 +33,25 @@ public class PlayerScript : MonoBehaviour
     private void Move()
     {
         float horizontalMoviment = Input.GetAxis("Horizontal");
+        rb.velocity = new Vector2(horizontalMoviment * speed, rb.velocity.y);
         if (horizontalMoviment < 0 && facingRight)
         {
             this.facingRight = false;
             this.FlipSprite();
         }
-        else if(horizontalMoviment > 0 && !facingRight)
+        else if (horizontalMoviment > 0 && !facingRight)
         {
             this.facingRight = true;
             this.FlipSprite();
         }
-        rb.velocity = new Vector2(horizontalMoviment * speed, rb.velocity.y);
+        if (horizontalMoviment != 0)
+        {
+            playerAnimator.SetBool("Walking", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("Walking", false);
+        }
     }
 
     private void FlipSprite()
@@ -51,9 +63,15 @@ public class PlayerScript : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKeyDown("up") && rb.velocity.y == 0)
+        bool jumping = Mathf.Abs(rb.velocity.y) > 0.05f;
+        if (Input.GetKeyDown("up") && !jumping)
         {
             this.rb.AddForce(new Vector2(0, jumpForce));
+            playerAnimator.SetBool("Jumping", true);
+        }
+        if (!jumping)
+        {
+            playerAnimator.SetBool("Jumping", false);
         }
     }
 
