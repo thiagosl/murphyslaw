@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f51ac42ba22b5c04cab8216be0360ef7
-timeCreated: 1457472077
+timeCreated: 1457637799
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -69,13 +69,13 @@ TextureImporter:
     - name: grasstileset_0
       rect:
         serializedVersion: 2
-        x: 60
+        x: 61
         y: 0
-        width: 90
+        width: 89
         height: 30
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: grasstileset_1
       rect:
