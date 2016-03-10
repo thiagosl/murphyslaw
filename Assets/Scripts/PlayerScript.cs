@@ -64,9 +64,13 @@ public class PlayerScript : MonoBehaviour
     private void Jump()
     {
         bool jumping = Mathf.Abs(rb.velocity.y) > 0.05f;
-        if (Input.GetKeyDown("up") && !jumping)
+        if (Input.GetKey("up") && !jumping)
         {
             this.rb.AddForce(new Vector2(0, jumpForce));
+            playerAnimator.SetBool("Jumping", true);
+        }
+        if (jumping)
+        {
             playerAnimator.SetBool("Jumping", true);
         }
         if (!jumping)
