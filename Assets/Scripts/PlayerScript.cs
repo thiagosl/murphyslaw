@@ -26,9 +26,16 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        Move();
+		InfinitRunnerMove ();
+        //Move();
         Jump();
     }
+
+	private void InfinitRunnerMove ()
+	{
+		rb.velocity = new Vector2(speed, rb.velocity.y);
+		playerAnimator.SetBool("Walking", true);
+	}
 
     private void Move()
     {
