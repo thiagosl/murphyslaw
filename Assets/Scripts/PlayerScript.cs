@@ -75,6 +75,8 @@ public class PlayerScript : MonoBehaviour
         {
             this.rb.AddForce(new Vector2(0, jumpForce));
             playerAnimator.SetBool("Jumping", true);
+			var audioSources = GetComponents<AudioSource> ();
+			audioSources[0].Play ();
         }
         if (jumping)
         {
@@ -85,6 +87,20 @@ public class PlayerScript : MonoBehaviour
             playerAnimator.SetBool("Jumping", false);
         }
     }
+
+	private void Dead()
+	{
+		Application.LoadLevel("GameOver");
+	}
+
+	void OnTriggerEnter2D (Collider2D other)
+	{
+		if(!other.tag.Equals("Floor"))
+		{
+			this.Dead ();
+		}
+		print("player colisao com "+other.name);
+	}
 
     // Update is called once per frame
     void Update()

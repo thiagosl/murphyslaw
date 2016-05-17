@@ -7,24 +7,16 @@ public class BirdScript : MonoBehaviour {
 	public float verticalSpeed;
 
 	private Rigidbody2D rb;
-	//private Animator birdAnimator;
-
-	// Use this for initialization
 	void Start()
 	{
 		this.horizontalSpeed = -5f;
 		this.verticalSpeed = -10f;
 		this.rb = GetComponent<Rigidbody2D>();
-		//this.birdAnimator = GetComponent<Animator>();
-		//this.birdAnimator.SetBool("Walking", false);
-		//this.birdAnimator.SetBool("Jumping", false);
 	}
 
 	void FixedUpdate()
 	{
 		Move();
-		//Move();
-		//Jump();
 	}
 
 	private void Move ()
