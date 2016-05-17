@@ -26,7 +26,6 @@ public class BirdScript : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		print("colisao com "+other.name);
 		this.verticalSpeed *= -1;
 	}
 
