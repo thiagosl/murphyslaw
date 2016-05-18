@@ -17,7 +17,7 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         this.speed = 4f;
-        this.jumpForce = 350f;
+        this.jumpForce = 400f;
         this.facingRight = true;
 		this.offset = 0f;
         this.rb = GetComponent<Rigidbody2D>();

@@ -51,6 +51,7 @@ public class SnakeScript : MonoBehaviour {
 		{
 			Destroy (gameObject);
 		}
+		print ("colidiu com "+other.name+"x1 = "+other.transform.position.x+" y1 = "+other.transform.position.y+" z1 = "+other.transform.position.z+" x2 = "+tf.position.x+" y2 = "+tf.position.y+" z2 = "+tf.position.z);
 	}
 
 	// Update is called once per frame
