@@ -7,11 +7,15 @@ public class BirdScript : MonoBehaviour {
 	public float verticalSpeed;
 
 	private Rigidbody2D rb;
+	private Transform tf;
+	private Animator animator;
 	void Start()
 	{
-		this.horizontalSpeed = -5f;
-		this.verticalSpeed = -10f;
+		this.horizontalSpeed = -12f;
+		this.verticalSpeed = -18f;
 		this.rb = GetComponent<Rigidbody2D>();
+		this.tf = GetComponent<Transform> ();
+		this.animator = GetComponent<Animator> ();
 	}
 
 	void FixedUpdate()
@@ -26,6 +30,10 @@ public class BirdScript : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
+		if (other.name.Equals ("ScreenLimit"))
+		{
+			Destroy (gameObject);
+		}
 		this.verticalSpeed *= -1;
 	}
 

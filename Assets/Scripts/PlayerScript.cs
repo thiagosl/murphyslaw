@@ -5,8 +5,10 @@ public class PlayerScript : MonoBehaviour
 {
     public float speed;
     public float jumpForce;
+	//public CameraScript camera;
 
     private bool facingRight;
+	private float offset;
     private Rigidbody2D rb;
     private Transform tf;
     private Animator playerAnimator;
@@ -14,9 +16,10 @@ public class PlayerScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        this.speed = 5f;
-        this.jumpForce = 600f;
+        this.speed = 4f;
+        this.jumpForce = 350f;
         this.facingRight = true;
+		this.offset = 0f;
         this.rb = GetComponent<Rigidbody2D>();
         this.tf = GetComponent<Transform>();
         this.playerAnimator = GetComponent<Animator>();
@@ -27,7 +30,6 @@ public class PlayerScript : MonoBehaviour
     void FixedUpdate()
     {
 		InfinitRunnerMove ();
-        //Move();
         Jump();
     }
 
@@ -35,43 +37,15 @@ public class PlayerScript : MonoBehaviour
 	{
 		rb.velocity = new Vector2(speed, rb.velocity.y);
 		playerAnimator.SetBool("Walking", true);
+		//float horizontalMoviment = Input.GetAxis("Horizontal");
+		//this.speed += horizontalMoviment/2;
+		//camera.transform.position.x;
 	}
-
-    private void Move()
-    {
-        float horizontalMoviment = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(horizontalMoviment * speed, rb.velocity.y);
-        if (horizontalMoviment < 0 && facingRight)
-        {
-            this.facingRight = false;
-            this.FlipSprite();
-        }
-        else if (horizontalMoviment > 0 && !facingRight)
-        {
-            this.facingRight = true;
-            this.FlipSprite();
-        }
-        if (horizontalMoviment != 0)
-        {
-            playerAnimator.SetBool("Walking", true);
-        }
-        else
-        {
-            playerAnimator.SetBool("Walking", false);
-        }
-    }
-
-    private void FlipSprite()
-    {
-        Vector3 scale = tf.localScale;
-        scale.x *= -1;
-        tf.localScale = scale;
-    }
 
     private void Jump()
     {
         bool jumping = Mathf.Abs(rb.velocity.y) > 0.05f;
-        if (Input.GetKey("up") && !jumping)
+		if (Input.GetKey("up") && !jumping)
         {
             this.rb.AddForce(new Vector2(0, jumpForce));
             playerAnimator.SetBool("Jumping", true);
@@ -95,16 +69,8 @@ public class PlayerScript : MonoBehaviour
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		if(!other.tag.Equals("Floor"))
-		{
+		if (other.tag.Equals ("Enemy")) {
 			this.Dead ();
 		}
-		print("player colisao com "+other.name);
 	}
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
