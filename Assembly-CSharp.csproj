@@ -46,13 +46,13 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\BGScroller.cs" />
-     <Compile Include="Assets\Scripts\BirdScript.cs" />
-     <Compile Include="Assets\Scripts\CameraScript.cs" />
      <Compile Include="Assets\Scripts\DiscoScript.cs" />
-     <Compile Include="Assets\Scripts\EnemyManager.cs" />
-     <Compile Include="Assets\Scripts\LevelManeger.cs" />
+     <Compile Include="Assets\Scripts\Enemy\BirdScript.cs" />
+     <Compile Include="Assets\Scripts\Enemy\SnakeScript.cs" />
+     <Compile Include="Assets\Scripts\Managers\EnemyManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\LevelManeger.cs" />
+     <Compile Include="Assets\Scripts\Managers\ScoreManager.cs" />
      <Compile Include="Assets\Scripts\PlayerScript.cs" />
-     <Compile Include="Assets\Scripts\SnakeScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

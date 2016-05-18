@@ -7,23 +7,23 @@ public class DiscoScript : MonoBehaviour {
 	public float verticalSpeed;
 
 	private Rigidbody2D rb;
-	private Transform tf;
-	private Animator animator;
+	private ScoreManager scoreManager;
+
 	void Start()
 	{
 		this.horizontalSpeed = -14f;
 		this.verticalSpeed = 0;
 		this.rb = GetComponent<Rigidbody2D>();
-		this.tf = GetComponent<Transform> ();
-		this.animator = GetComponent<Animator> ();
+		this.scoreManager = GameObject.FindGameObjectWithTag ("Score").GetComponent<ScoreManager>();
 	}
 
 	void FixedUpdate()
 	{
 		Move ();
-		Vector3 scale = tf.localScale;
-		scale.x *= -1;
-		this.tf.localScale = scale;
+	}
+
+	void UpdateScore() {
+		scoreManager.IncrementScore (50);
 	}
 
 	private void Move ()
@@ -31,17 +31,15 @@ public class DiscoScript : MonoBehaviour {
 		rb.velocity = new Vector2(horizontalSpeed, verticalSpeed);
 	}
 
-	void OnTriggerEnter2D (Collider2D other)
-	{
-		if (other.name.Equals ("ScreenLimit"))
-		{
+	void OnTriggerEnter2D (Collider2D other) {
+		if (other.name.Equals ("ScreenLimit")) {
 			Destroy (gameObject);
 		}
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-
+		if (other.tag.Equals ("Player")) {
+			var audioSource = GetComponent<AudioSource> ();
+			audioSource.Play ();
+			UpdateScore ();
+			Destroy (gameObject);
+		}
 	}
 }

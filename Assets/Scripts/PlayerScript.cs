@@ -5,23 +5,15 @@ public class PlayerScript : MonoBehaviour
 {
     public float speed;
     public float jumpForce;
-	//public CameraScript camera;
 
-    private bool facingRight;
-	private float offset;
     private Rigidbody2D rb;
-    private Transform tf;
     private Animator playerAnimator;
 
-    // Use this for initialization
     void Start()
     {
-        this.speed = 4f;
-        this.jumpForce = 400f;
-        this.facingRight = true;
-		this.offset = 0f;
+        this.speed = 10f;
+        this.jumpForce = 50000f;
         this.rb = GetComponent<Rigidbody2D>();
-        this.tf = GetComponent<Transform>();
         this.playerAnimator = GetComponent<Animator>();
         this.playerAnimator.SetBool("Walking", false);
         this.playerAnimator.SetBool("Jumping", false);
@@ -35,11 +27,24 @@ public class PlayerScript : MonoBehaviour
 
 	private void InfinitRunnerMove ()
 	{
-		rb.velocity = new Vector2(speed, rb.velocity.y);
 		playerAnimator.SetBool("Walking", true);
-		//float horizontalMoviment = Input.GetAxis("Horizontal");
-		//this.speed += horizontalMoviment/2;
-		//camera.transform.position.x;
+		float horizontalMoviment = Input.GetAxis("Horizontal");
+		Vector2 playerPosScreen = Camera.main.WorldToScreenPoint(transform.position);
+		if (horizontalMoviment < 0) {
+			if (playerPosScreen.x > 30.0f) {
+				rb.velocity = new Vector2 (-speed, rb.velocity.y);
+			} else {
+				rb.velocity = new Vector2 (0, rb.velocity.y);
+			}
+		} else if (horizontalMoviment > 0) {
+			if (playerPosScreen.x < Screen.width - 30.0f) {
+				rb.velocity = new Vector2 (speed, rb.velocity.y);
+			} else {
+				rb.velocity = new Vector2 (0, rb.velocity.y);
+			}
+		} else {
+			rb.velocity = new Vector2(0, rb.velocity.y);
+		}
 	}
 
     private void Jump()

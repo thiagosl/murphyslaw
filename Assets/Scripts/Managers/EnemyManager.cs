@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System;
 
 public class EnemyManager : MonoBehaviour {
 	public GameObject enemy;
@@ -12,7 +12,7 @@ public class EnemyManager : MonoBehaviour {
 	
 	void Spawn()
 	{
-		int index = Random.Range (0, spawnPoints.Length);
+		int index = UnityEngine.Random.Range (0, spawnPoints.Length);
 		Instantiate (enemy, spawnPoints[index].position, spawnPoints[index].rotation);
 	}
 }
