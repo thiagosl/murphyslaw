@@ -49,9 +49,11 @@
      <Compile Include="Assets\Scripts\DiscoScript.cs" />
      <Compile Include="Assets\Scripts\Enemy\BirdScript.cs" />
      <Compile Include="Assets\Scripts\Enemy\SnakeScript.cs" />
+     <Compile Include="Assets\Scripts\GameOverScript.cs" />
      <Compile Include="Assets\Scripts\Managers\EnemyManager.cs" />
      <Compile Include="Assets\Scripts\Managers\LevelManeger.cs" />
      <Compile Include="Assets\Scripts\Managers\ScoreManager.cs" />
+     <Compile Include="Assets\Scripts\MenuScript.cs" />
      <Compile Include="Assets\Scripts\PlayerScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

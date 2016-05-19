@@ -31,13 +31,13 @@ public class PlayerScript : MonoBehaviour
 		float horizontalMoviment = Input.GetAxis("Horizontal");
 		Vector2 playerPosScreen = Camera.main.WorldToScreenPoint(transform.position);
 		if (horizontalMoviment < 0) {
-			if (playerPosScreen.x > 30.0f) {
+			if (playerPosScreen.x > 60.0f) {
 				rb.velocity = new Vector2 (-speed, rb.velocity.y);
 			} else {
 				rb.velocity = new Vector2 (0, rb.velocity.y);
 			}
 		} else if (horizontalMoviment > 0) {
-			if (playerPosScreen.x < Screen.width - 30.0f) {
+			if (playerPosScreen.x < Screen.width - 60.0f) {
 				rb.velocity = new Vector2 (speed, rb.velocity.y);
 			} else {
 				rb.velocity = new Vector2 (0, rb.velocity.y);
@@ -69,6 +69,7 @@ public class PlayerScript : MonoBehaviour
 
 	private void Dead()
 	{
+		GameObject.FindGameObjectWithTag ("Score").GetComponent<ScoreManager> ().SaveHighScore();
 		Application.LoadLevel("GameOver");
 	}
 
